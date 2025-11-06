@@ -411,8 +411,12 @@ export default async function handler(req, res) {
             fallbackKey = 'van_gogh';
           }
         } else if (selectedStyle.category === 'oriental') {
-          // 'korean' → 'korean' (그대로 사용)
-          fallbackKey = selectedStyle.id;
+          // 동양화 fallback 키 설정
+          if (selectedStyle.id === 'chinese') {
+            fallbackKey = 'chinese_ink';  // 중국은 기본 수묵화
+          } else {
+            fallbackKey = selectedStyle.id;  // korean, japanese
+          }
         }
         
         console.log('Using fallback key:', fallbackKey);
